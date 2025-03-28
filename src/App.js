@@ -1,9 +1,10 @@
-// EmailSender.js (Updated)
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
 export default function EmailSender() {
+  const MAILER_SERVICE_IP = "13.230.201.109";
+  const FILEMANAGER_SERVICE_IP = "18.206.121.143";
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [fileType, setFileType] = useState('png');
@@ -17,12 +18,12 @@ export default function EmailSender() {
   }, [searchQuery]);
 
   const fetchEmails = async () => {
-    const response = await axios.get(`http://localhost:5002/emails?search=${searchQuery}`);
+    const response = await axios.get(`http://${MAILER_SERVICE_IP}/emails?search=${searchQuery}`);
     setEmails(response.data);
   };
 
   const generateEmailBody = async () => {
-    const images = await axios.get(`http://localhost:5001/list-files?folder=${subject}&fileType=${fileType}`);
+    const images = await axios.get(`http://${FILEMANAGER_SERVICE_IP}/list-files?folder=${subject}&fileType=${fileType}`);
     return images.data.map(img => `
       <div style='text-align:center; margin:20px;'>
         <img src='${img}' style='
@@ -44,7 +45,7 @@ export default function EmailSender() {
   
   const sendEmail = async () => {
     const body = await generateEmailBody();
-    await axios.post('http://localhost:5002/send-email', { 
+    await axios.post(`http://${MAILER_SERVICE_IP}/send-emai`, { 
       to: email, 
       subject, 
       body 
