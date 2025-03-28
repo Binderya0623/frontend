@@ -12,27 +12,338 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+/* App.css (Updated) */
+:root {
+  --primary-color: #4A90E2;
+  --secondary-color: #F5F7FA;
+  --accent-color: #50E3C2;
+  --text-color: #2C3E50;
+}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.email-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.app-title {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.form-section {
+  background: #ffffff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.section-title {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.button-group {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.send-button, .preview-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-button {
+  background: var(--primary-color);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.preview-button {
+  background: var(--accent-color);
+  color: var(--text-color);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.email-list {
+  margin-top: 1rem;
+}
+
+.email-card {
+  background: white;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.email-card:hover {
+  transform: translateY(-2px);
+}
+
+.email-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.email-subject {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.email-date {
+  color: #7F8C8D;
+  font-size: 0.9rem;
+}
+
+.preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.preview-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.email-body-preview {
+  margin: 1rem 0;
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.search-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-group input {
+  width: 100%;
+  padding: 0.8rem 2rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7F8C8D;
+}
+/* App.css (Pink Theme) */
+:root {
+  --primary-color: #FF85B3; /* Soft pink */
+  --secondary-color: #FFF0F5; /* Light pink background */
+  --accent-color: #FFB6C1; /* Baby pink */
+  --text-color: #5A2A40; /* Deep rose for contrast */
+  --pattern: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff85b3' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+body {
+  background: var(--secondary-color) var(--pattern);
+}
+
+.email-container {
+  max-width: 1000px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 133, 179, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.app-title {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+}
+
+.form-section {
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(255, 133, 179, 0.1);
+}
+
+.compact .input-group {
+  margin-bottom: 0.8rem;
+}
+
+.input-group input, 
+.input-group select {
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 2px solid var(--accent-color);
+  background: #FFF8FB;
+}
+
+.button-group.compact {
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.send-button, .preview-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.send-button {
+  background: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(255, 133, 179, 0.3);
+}
+
+.preview-button {
+  background: var(--accent-color);
+}
+
+.email-card {
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.email-subject {
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.email-date {
+  font-size: 0.8rem;
+}
+
+.preview-modal {
+  backdrop-filter: blur(3px);
+}
+
+.preview-content {
+  background: #FFF8FB;
+  border: 2px solid var(--primary-color);
+}
+
+.email-body-preview {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.preview-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.search-group input {
+  background: #FFF8FB;
+  border-color: var(--accent-color);
+}
+
+/* Cute decorations */
+.form-section::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff85b3" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+  opacity: 0.1;
+  right: -10px;
+  top: -10px;
+}
+
+.email-list::after {
+  content: '';
+  display: block;
+  height: 20px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%23ff85b3" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>') repeat-x;
+  opacity: 0.1;
 }
