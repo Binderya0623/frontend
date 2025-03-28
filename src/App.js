@@ -3,8 +3,8 @@ import axios from 'axios';
 import './App.css';
 
 export default function EmailSender() {
-  const MAILER_SERVICE_IP = "13.230.201.109";
-  const FILEMANAGER_SERVICE_IP = "18.206.121.143";
+  const MAILER_SERVICE_IP = "54.95.220.206";
+  const FILEMANAGER_SERVICE_IP = "52.0.108.242";
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [fileType, setFileType] = useState('png');
