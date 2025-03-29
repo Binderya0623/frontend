@@ -18,41 +18,63 @@ export default function EmailSender() {
   }, [searchQuery]);
 
   const fetchEmails = async () => {
-    const response = await axios.get(`http://${MAILER_SERVICE_IP}/emails?search=${searchQuery}`);
-    setEmails(response.data);
+    try {
+      const response = await axios.get(`https://${MAILER_SERVICE_IP}/emails?search=${searchQuery}`);
+      setEmails(response.data);
+    } catch (error) {
+      console.error('Error fetching emails:', error);
+    }
   };
 
   const generateEmailBody = async () => {
-    const images = await axios.get(`http://${FILEMANAGER_SERVICE_IP}/list-files?folder=${subject}&fileType=${fileType}`);
-    return images.data.map(img => `
-      <div style='text-align:center; margin:20px;'>
-        <img src='${img}' style='
-          border-radius:15px;
-          box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-          max-width: 100%;
-          height: auto;
-          border: 2px solid #fff;
-        '/>
-      </div>
-    `).join('');
+    try {
+      const images = await axios.get(`https://${FILEMANAGER_SERVICE_IP}/list-files?folder=${subject}&fileType=${fileType}`);
+      return images.data.map(img => `
+        <div style='text-align:center; margin:20px;'>
+          <img src='${img}' style='
+            border-radius:15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #fff;
+          '/>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error('Error generating email body:', error);
+      return '';
+    }
   };
 
   const handlePreview = async () => {
+    if (!email || !subject) {
+      alert('Please fill out both email and subject fields.');
+      return;
+    }
     const body = await generateEmailBody();
     setPreviewContent({ subject, to: email, body });
     setShowPreview(true);
   };
   
   const sendEmail = async () => {
+    if (!email || !subject) {
+      alert('Please fill out both email and subject fields.');
+      return;
+    }
     const body = await generateEmailBody();
-    await axios.post(`http://${MAILER_SERVICE_IP}/send-emai`, { 
-      to: email, 
-      subject, 
-      body 
-    });
-    alert('🎉 Email sent successfully!');
-    fetchEmails();
-    setShowPreview(false);
+    try {
+      await axios.post(`https://${MAILER_SERVICE_IP}/send-email`, { 
+        to: email, 
+        subject, 
+        body 
+      });
+      alert('🎉 Email sent successfully!');
+      fetchEmails();
+      setShowPreview(false);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email. Please try again later.');
+    }
   };
 
   return (
