@@ -3,8 +3,8 @@ import axios from 'axios';
 import './App.css';
 
 export default function EmailSender() {
-  const MAILER_SERVICE_IP = "54.95.220.206";
-  const FILEMANAGER_SERVICE_IP = "52.0.108.242";
+  const MAILER_SERVICE_IP = "ec2-54-95-220-206.ap-northeast-1.compute.amazonaws.com";
+  const FILEMANAGER_SERVICE_IP = "ec2-52-0-108-242.compute-1.amazonaws.com";
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [fileType, setFileType] = useState('png');
@@ -47,20 +47,12 @@ export default function EmailSender() {
   };
 
   const handlePreview = async () => {
-    if (!email || !subject) {
-      alert('Please fill out both email and subject fields.');
-      return;
-    }
     const body = await generateEmailBody();
     setPreviewContent({ subject, to: email, body });
     setShowPreview(true);
   };
-  
+
   const sendEmail = async () => {
-    if (!email || !subject) {
-      alert('Please fill out both email and subject fields.');
-      return;
-    }
     const body = await generateEmailBody();
     try {
       await axios.post(`https://${MAILER_SERVICE_IP}/send-email`, { 
@@ -73,13 +65,12 @@ export default function EmailSender() {
       setShowPreview(false);
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('Failed to send email. Please try again later.');
     }
   };
 
   return (
     <div className='email-container'>
-      {/* Preview Modal - Updated */}
+      {/* Preview Modal */}
       {showPreview && (
         <div className="preview-modal">
           <div className="preview-content">
@@ -102,7 +93,7 @@ export default function EmailSender() {
       )}
 
       <h1 className="app-title">📩 Pink Mail Express</h1>
-      
+
       <div className="email-form">
         <div className="form-section">
           <h2 className="section-title">💌 Compose Email</h2>
