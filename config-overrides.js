@@ -1,9 +1,3 @@
-module.exports = {
-    webpack: (config) => {
-      config.resolve.fallback = {
-        https: require.resolve('https-browserify'),
-      };
-      return config;
-    },
-  };
-  
+module.exports = function override(config, env) {
+  return config;
+};
